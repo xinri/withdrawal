@@ -45,4 +45,17 @@ public class WithdrawalTest
     // then
     assertThat(account.getBalance(), is(-1.0d));
   }
+
+  @Test
+  public void withdrawalWithDoubleProblem() throws WithrawalNegativeValueException
+  {
+    // given
+    Account account = new Account("Jean-Pierre", 0.3d);
+
+    // when
+    account.withdrawal(0.2d);
+
+    // then
+    assertThat(account.getBalance(), is(0.1d));
+  }
 }
