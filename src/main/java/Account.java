@@ -1,5 +1,7 @@
 import exceptions.WithrawalNegativeValueException;
 
+import java.math.BigDecimal;
+
 
 /**
  * Created by hlay on 09/07/18.
@@ -7,23 +9,27 @@ import exceptions.WithrawalNegativeValueException;
 public class Account
 {
   private String name;
-  private double balance;
+  private BigDecimal balance;
 
 
-  public Account(String name, double value) {
+  public Account(String name, double balance) {
     this.name = name;
-    this.balance = value;
+    this.balance = BigDecimal.valueOf(balance);
   }
+
 
   public void withdrawal(double value) throws WithrawalNegativeValueException {
 
-    if (value < 0) throw new WithrawalNegativeValueException();
+    BigDecimal bgValue = BigDecimal.valueOf(value);
 
-    this.balance -= value;
+    if (bgValue.compareTo(BigDecimal.ZERO) < 0) throw new WithrawalNegativeValueException();
+
+    balance = balance.subtract(bgValue);
   }
+
 
   public double getBalance()
   {
-    return balance;
+    return balance.doubleValue();
   }
 }

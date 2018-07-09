@@ -23,6 +23,7 @@ public class WithdrawalTest
     assertThat(account.getBalance(), is(90.0d));
   }
 
+
   @Test(expected = WithrawalNegativeValueException.class)
   public void withdrawalNegativeValue() throws WithrawalNegativeValueException
   {
@@ -32,6 +33,7 @@ public class WithdrawalTest
     // when
     account.withdrawal(-500);
   }
+
 
   @Test
   public void withdrawalWithNotEnoughBalance() throws WithrawalNegativeValueException
@@ -45,6 +47,7 @@ public class WithdrawalTest
     // then
     assertThat(account.getBalance(), is(-1.0d));
   }
+
 
   @Test
   public void withdrawalWithDoubleProblem() throws WithrawalNegativeValueException
