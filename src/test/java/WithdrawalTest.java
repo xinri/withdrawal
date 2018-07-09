@@ -22,4 +22,13 @@ public class WithdrawalTest
     assertThat(account.getBalance(), is(90.0d));
   }
 
+  @Test(expected = WithrawalNegativeValue.class)
+  public void withdrawalNegativeValue()
+  {
+    // given
+    Account account = new Account("Jean-Pierre", 100d);
+
+    // when
+    account.withdrawal(-500);
+  }
 }
