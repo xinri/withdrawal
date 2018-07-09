@@ -1,3 +1,4 @@
+import exceptions.WithrawalNegativeValueException;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -10,7 +11,7 @@ import static org.junit.Assert.assertThat;
 public class WithdrawalTest
 {
   @Test
-  public void nominalCase() {
+  public void nominalCase() throws WithrawalNegativeValueException {
 
     // given
     Account account = new Account("Jean-Pierre", 100d);
@@ -22,13 +23,26 @@ public class WithdrawalTest
     assertThat(account.getBalance(), is(90.0d));
   }
 
-  @Test(expected = WithrawalNegativeValue.class)
-  public void withdrawalNegativeValue()
+  @Test(expected = WithrawalNegativeValueException.class)
+  public void withdrawalNegativeValue() throws WithrawalNegativeValueException
   {
     // given
     Account account = new Account("Jean-Pierre", 100d);
 
     // when
     account.withdrawal(-500);
+  }
+
+  @Test
+  public void withdrawalWithNotEnoughBalance() throws WithrawalNegativeValueException
+  {
+    // given
+    Account account = new Account("Jean-Pierre", 100d);
+
+    // when
+    account.withdrawal(101d);
+
+    // then
+    assertThat(account.getBalance(), is(-1.0d));
   }
 }
