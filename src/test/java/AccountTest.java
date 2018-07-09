@@ -8,7 +8,7 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by hlay on 09/07/18.
  */
-public class WithdrawalTest
+public class AccountTest
 {
   @Test
   public void nominalCase() throws WithrawalNegativeValueException {
