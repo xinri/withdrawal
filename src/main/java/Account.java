@@ -12,7 +12,10 @@ public class Account
     this.balance = value;
   }
 
-  public void withdrawal(double value) {
+  public void withdrawal(double value) throws WithrawalNegativeValueException {
+
+    if (value < 0) throw new WithrawalNegativeValueException();
+
     this.balance -= value;
   }
 
