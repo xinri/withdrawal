@@ -23,6 +23,18 @@ public class AccountTest
     assertThat(account.getBalance(), is(90.0d));
   }
 
+  @Test
+  public void minimalWithdrawal() throws WithrawalNegativeValueException {
+
+    // given
+    Account account = new Account("Jean-Pierre", 100d);
+
+    // when
+    account.withdrawal(0);
+
+    // then
+    assertThat(account.getBalance(), is(100.0d));
+  }
 
   @Test(expected = WithrawalNegativeValueException.class)
   public void withdrawalNegativeValue() throws WithrawalNegativeValueException
@@ -32,6 +44,16 @@ public class AccountTest
 
     // when
     account.withdrawal(-500);
+  }
+
+  @Test(expected = WithrawalNegativeValueException.class)
+  public void withdrawalNegativeValueLimit() throws WithrawalNegativeValueException
+  {
+    // given
+    Account account = new Account("Jean-Pierre", 100d);
+
+    // when
+    account.withdrawal(-100.00001);
   }
 
 
